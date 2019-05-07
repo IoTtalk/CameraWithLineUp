@@ -1,0 +1,23 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+/* btn img bootstrap background image center */
+.btn-ptz
+{
+	width: 100%; 
+	height: 100%; 
+	background-repeat: no-repeat; 
+	background-size: contain;
+	background-position: center center;
+}
+
+/* The video will be resized to always take up all the available space */
+video {
+    width: 100%;
+}
+
+/* hide timeline of the video tag in HTML5. The solution was a suggestion for webkit browsers */
+video::-webkit-media-controls-timeline {
+    display: none;
+}

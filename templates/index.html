@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <META CHARSET="utf-8">
+    <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+    <META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    <META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="no-cache, no-store, must-revalidate">
+
+    <title>NCTU IoTtalk Remote Controller with Live View!</title>
+
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="static/img/favicon.ico" type="image/x-icon">
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+
+    <script src="static/js/kurento-client.js"></script>
+    <script src="static/js/kurento-utils.js"></script>
+    <script src="static/js/console.js"></script>
+    <script src="static/js/index.js"></script>
+
+    <script src="static/js/scripts.js"></script>
+  </head>
+
+  <body onunload="bodyOnUnload();">
+    <div class="row container-fluid">
+
+      <!-- line up anno start -->
+      <div class="col-sm-12">
+        <H1 id="waiting_anno">You are number <span id="waiting_number">-</span>/<span id="waiting_total">-</span> in line.</H1>
+      </div>
+      <!-- line up anno end -->
+
+      <!-- Video (left panel) start -->
+      <div class="col-sm-7">
+
+        <!-- video stream start -->
+        <div class="col-sm-12">
+          <div id="videoFSContainer" class="img-rounded">
+            <video id="videoOutput" muted autoplay class="img-rounded"></video>
+          </div>
+        </div>
+        <!-- video stream end -->
+
+        <!-- video management (hidden) start -->
+        <div class="col-sm-12 hidden">
+          <!-- video logging form -->
+          <form id="login" target="retframe" method="post"></form>
+
+          <!-- Video control (Zoom) use -->
+          <iframe id="retframe" name="retframe" frameborder="0"></iframe>
+
+          <!-- video address -->
+          <input id="address" type="text">
+
+          <!-- Video start button -->
+          <a id="start" href="#" class="btn btn-success">
+            <span class="glyphicon glyphicon-play"></span>
+          </a>
+
+          <!-- Video stop button -->
+          <a id="stop" href="#" class="btn btn-danger">
+            <span class="glyphicon glyphicon-stop"></span>
+          </a>
+
+          <!-- Video log -->
+          <div id="console"></div>
+        </div>
+        <!-- video logging (hidden) end -->
+
+        <!-- camera PTZ IoTtalk API start -->
+        <div id="PTZ_panel" class="row hidden">
+          <script src="static/js/iottalk/csmapi.js"></script>
+          <script src="static/js/iottalk/dan.js"></script>
+          <script src="static/js/iottalk/dai.js"></script>
+          <script src="static/js/iottalk/ida.js"></script>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'tele'); dan.push('PTZcommand-O', [5, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-in.png');">
+          </div>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'wide'); dan.push('PTZcommand-O', [6, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-out.png');">
+          </div>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Up_I()" style="background-image:url('static/img/arrow-up.png');">
+          </div>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Down_I()" style="background-image:url('static/img/arrow-down.png');">
+          </div>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Left_I()" style="background-image:url('static/img/arrow-left.png');">
+          </div>
+          <div class="col-xs-2">
+            <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Right_I()" style="background-image:url('static/img/arrow-right.png');">
+          </div>
+        </div>
+        <!-- camera PTZ IoTtalk API end -->
+
+        <br>
+
+        <!-- PTZ commands reveived log start -->
+        <div class="col-sm-12">
+          <label class="col-sm-2" control-label>The Last PTZ Command:</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="PTZcommands" type="text" value="will be shown here..." readonly>
+          </div>
+        </div>
+        <!-- PTZ commands received log end -->
+      </div>
+      <!-- Video (left panel) end -->
+
+      <!-- Remote control (right panel) start -->
+      <div class="col-sm-5" >
+        <h3 class="text-center text-info"></h3>
+        <iframe id="remotecontrol" style="height:1000px; width:100%;" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <!-- Remote control (right panel) end -->
+    </div>
+  </body>
+</html>
