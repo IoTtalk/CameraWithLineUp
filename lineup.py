@@ -74,12 +74,13 @@ def handler():
     return 'Done'
 
 
-def server(app, host="0.0.0.0", port=5000, handler_class=WebSocketHandler):
+def server(app, host="0.0.0.0", port=5000, handler_class=WebSocketHandler, *args, **argv):
     global __server
     if not __server:
         __server = WSGIServer((host, port),
                               app,
-                              handler_class=WebSocketHandler)
+                              handler_class=WebSocketHandler,
+                              *args, **argv)
     return __server
 
 def serve_forever():

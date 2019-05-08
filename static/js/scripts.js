@@ -10,20 +10,7 @@ var KURENTO_SERVER_PORT = "";
 
 var REMOTE_CONTROL_URL = "";
 
-var websocket_url = "ws://" + location.host + "/lineup"
-
-var socket = null;
-var uuid = null;
-
-function UUID () {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-         s4() + '-' + s4() + s4() + s4();
-}
+var websocket_url = "ws://" + location.host + "/lineup";
 
 function fadeOutEffect(target) {
     var fadeEffect = setInterval(function () {
@@ -188,8 +175,6 @@ window.addEventListener('load', ()=>{
   //start the video
   document.getElementById('start').click();
 
-  console.log("start");
-
   function startControl(){
     //logging video page  (for zoom control)
     document.getElementById("login").action = "http://" + IP_CAM_USERNAME + ":" + IP_CAM_PASSWORD + "@" + IP_CAM_HOST + ":" + IP_CAM_API_PORT;
@@ -203,25 +188,20 @@ window.addEventListener('load', ()=>{
     $('#PTZ_panel').removeClass('hidden');
   }
 
-  socket = new WebSocket(websocket_url);
-  socket.onopen = (event) => {
-    socket.send('online');
-  }
-  socket.onmessage = (event) => {
-    let response = JSON.parse(event.data);
-    console.log(response);
-    if (response.op =="start") {
-      uuid = response.uuid;
-    } else if (response.uuid == uuid && response.op == "number") {
-      if (response.number == 0) {
-        $('#waiting_anno').text("You can control now...");
-        fadeOutEffect($('#waiting_anno')[0]);
-        startControl();
-        socket.onmessage = null;
-      } else {
-        $('#waiting_number').text(response.number);
-        $('#waiting_total').text(response.total);
-      }
+  // lineup
+  function onmessage(data) {
+    // data = {'number': <your position in line>,
+    //         'total': <total person in line>}
+    if (data.number == 0) {
+      $('#waiting_anno').text("You can control now...");
+      fadeOutEffect($('#waiting_anno')[0]);
+      startControl();
+    } else {
+      $('#waiting_number').text(data.number);
+      $('#waiting_total').text(data.total);
     }
   }
+  lineup.init(websocket_url, onmessage);
+
+  console.log("start");
 })
