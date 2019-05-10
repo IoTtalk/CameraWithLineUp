@@ -9,9 +9,9 @@ install python package `gevent-websocket`
 ```shell
 pip install gevent-websocket
 ```
-or use `requirement.txt`
+or use `requirements.txt`
 ```shell
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ### usage (python)
