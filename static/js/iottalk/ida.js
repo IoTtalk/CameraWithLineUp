@@ -20,7 +20,7 @@ function Geolocation_O(x, y){
 }
 
 function iottalk_register() {
-    csmapi.set_endpoint('http://iot.iottalk.tw:9999');
+    csmapi.set_endpoint('http://IP:9999');
     var profile = {
         'dm_name': 'PTZcontroller',
         'idf_list':[Up_I, Down_I, Right_I, Left_I],
