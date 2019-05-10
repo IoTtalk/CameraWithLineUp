@@ -25,6 +25,7 @@ function iottalk_register() {
         'dm_name': 'PTZcontroller',
         'idf_list':[Up_I, Down_I, Right_I, Left_I],
         'odf_list':[PTZcommand_O, Geolocation_O],
+        'd_name': undefined,
     };
     /*******************************************************************/
     dai(profile, {'ida_init': function(){}});     
