@@ -33,9 +33,6 @@ var dan = (function () {
     }
 
     function register (endpoint, profile, callback) {
-        profile['d_name'] = 'OrchidHouseCam'
-                //(Math.floor(Math.random() * 99)).toString() + '.' + profile['dm_name'];
-                //profile['dm_name'] +'-'+ _mac_addr.slice(_mac_addr.length - 4);
                 _profile = profile;
                 csmapi.set_endpoint(endpoint);
 
