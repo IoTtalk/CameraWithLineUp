@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("lineup")
 
 __server = None
-__socket_client_list = []
+__socket_client_dict = {}
 
 
 class SocketClient():
@@ -55,20 +55,29 @@ def handler():
     if not websocket:
         return 'use websocket'
 
+    # check client list
+    uri = request.url_rule.rule
+    if not __socket_client_dict.get(uri):
+        __socket_client_dict[uri] = []
+
+    # Create client instance
     client = SocketClient(uuid.uuid4(), websocket)
     client.notify_start()
-    __socket_client_list.append(client)
-    for idx, c in enumerate(__socket_client_list):
-        c.notify_number(idx, len(__socket_client_list) - 1)
+
+    # Notify everyone that there is a new client
+    __socket_client_dict[uri].append(client)
+    for idx, c in enumerate(__socket_client_dict[uri]):
+        c.notify_number(idx, len(__socket_client_dict[uri]) - 1)
 
     while True:
         message = client.receive()
 
         # Close socket, mesaage = None
         if message is None:
-            __socket_client_list.remove(client)
-            for idx, c in enumerate(__socket_client_list):
-                c.notify_number(idx, len(__socket_client_list) - 1)
+            # Notify everyone that someone is offline
+            __socket_client_dict[uri].remove(client)
+            for idx, c in enumerate(__socket_client_dict[uri]):
+                c.notify_number(idx, len(__socket_client_dict[uri]) - 1)
             break
 
     return 'Done'
