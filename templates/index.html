@@ -76,39 +76,41 @@
         <!-- video logging (hidden) end -->
 
         <!-- camera PTZ IoTtalk API start -->
-        <div id="PTZ_panel" class="row hidden">
-          <script src="static/js/iottalk/csmapi.js"></script>
-          <script src="static/js/iottalk/dan.js"></script>
-          <script src="static/js/iottalk/dai.js"></script>
-          <script src="static/js/iottalk/ida.js"></script>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'tele'); dan.push('PTZcommand-O', [5, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-in.png');">
-          </div>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'wide'); dan.push('PTZcommand-O', [6, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-out.png');">
-          </div>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Up_I()" style="background-image:url('static/img/arrow-up.png');">
-          </div>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Down_I()" style="background-image:url('static/img/arrow-down.png');">
-          </div>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Left_I()" style="background-image:url('static/img/arrow-left.png');">
-          </div>
-          <div class="col-xs-2">
-            <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Right_I()" style="background-image:url('static/img/arrow-right.png');">
+        <div id="PTZ_panel" class="col-sm-12 hidden">
+          <div class="row">
+            <script src="static/js/iottalk/csmapi.js"></script>
+            <script src="static/js/iottalk/dan.js"></script>
+            <script src="static/js/iottalk/dai.js"></script>
+            <script src="static/js/iottalk/ida.js"></script>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'tele'); dan.push('PTZcommand-O', [5, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-in.png');">
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-success btn-sm btn-ptz" onclick="CamControl('zoom', 'wide'); dan.push('PTZcommand-O', [6, IP_CAM_USERNAME]);" style="background-image:url('static/img/zoom-out.png');">
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Up_I()" style="background-image:url('static/img/arrow-up.png');">
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-primary btn-sm btn-ptz" onclick="Down_I()" style="background-image:url('static/img/arrow-down.png');">
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Left_I()" style="background-image:url('static/img/arrow-left.png');">
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-block btn-warning btn-sm btn-ptz" onclick="Right_I()" style="background-image:url('static/img/arrow-right.png');">
+            </div>
           </div>
         </div>
         <!-- camera PTZ IoTtalk API end -->
-
-        <br>
-
         <!-- PTZ commands reveived log start -->
         <div class="col-sm-12">
-          <label class="col-sm-2" control-label>The Last PTZ Command:</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="PTZcommands" type="text" value="will be shown here..." readonly>
+          <div class="row">
+            <br>
+            <label class="col-sm-2" control-label>The Last PTZ Command:</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="PTZcommands" type="text" value="will be shown here..." readonly>
+            </div>
           </div>
         </div>
         <!-- PTZ commands received log end -->
