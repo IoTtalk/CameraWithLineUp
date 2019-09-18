@@ -19,20 +19,23 @@
 
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
-
-    <script src="static/js/lineup.js"></script>
-    <script src="static/js/scripts.js"></script>
+    <script type="text/javascript" src="static/js/qrcode.js"></script>
   </head>
 
   <body onunload="bodyOnUnload();">
     <div class="row container-fluid">
-
-      <!-- line up anno start -->
-      <div class="col-sm-12">
-        <H1 id="waiting_anno">You are number <span id="waiting_number">-</span>/<span id="waiting_total">-</span> in line.</H1>
-      </div>
-      <!-- line up anno end -->
-
+      <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
     </div>
   </body>
 </html>
+
+
+<script type="text/javascript">
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    width : 300,
+    height : 300
+  });
+
+  qrcode.makeCode("http://"+window.location.hostname+":5000");
+</script>
+

@@ -14,6 +14,11 @@ def root():
 # add lineup websocket handler
 app.add_url_rule('/lineup', 'lineup', lineup.handler)
 
+@app.route('/qrcode', methods=['GET'])
+def qrcode():
+    return render_template('qrcode.html')
+
+
 if __name__ == "__main__":
     server = lineup.server(app)
     server.serve_forever()
