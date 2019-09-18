@@ -1,4 +1,4 @@
-# CameraWithLineUp
+# PureLineUp
 This is a sample for line up module base on [Flask](http://flask.pocoo.org) server.
 
 
