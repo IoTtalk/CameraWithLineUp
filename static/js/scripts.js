@@ -23,11 +23,11 @@ window.addEventListener('load', ()=>{
     // data = {'number': <your position in line>,
     //         'total': <total person in line>}
     if (data.number == 0) {
-      $('#waiting_anno').text("You can control now...");
-      fadeOutEffect($('#waiting_anno')[0]);
+      document.getElementById('waiting_anno').innerHTML = "You can control now...";
+      fadeOutEffect(document.getElementById('waiting_anno'));
     } else {
-      $('#waiting_number').text(data.number);
-      $('#waiting_total').text(data.total);
+      document.getElementById('waiting_number').innerHTML = data.number;
+      document.getElementById('waiting_total').innerHTML = data.total;
     }
   }
   lineup.init(websocket_url, onmessage);
