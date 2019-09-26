@@ -14,6 +14,10 @@ or use `requirements.txt`
 pip install -r requirements.txt
 ```
 
+
+### settings
+fill settings in `config.py`
+
 ### usage (python)
 import the `lineup.py` module
 ```python
