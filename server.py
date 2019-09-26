@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 import lineup
+import genQRcode
+from config import qrcode_url
 
 app = Flask(__name__)
 app.secret_key = ''
-
 
 @app.route('/', methods=['GET'])
 def root():
@@ -20,5 +21,6 @@ def qrcode():
 
 
 if __name__ == "__main__":
+    genQRcode.genQRimg(qrcode_url)
     server = lineup.server(app)
     server.serve_forever()
