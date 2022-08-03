@@ -1,13 +1,29 @@
 var lineup = (function(){
   let socket = null;
   let uuid = null;
-  let open_callback = null;
+  let onopen_callback = null;
+  let onerror_callback = null;
   let onmessage_callback = null;
+  let onclose_callback = null;
 
   function _onopen(event) {
     socket.send('online');
-    if (open_callback){
-      open_callback();
+    if (onopen_callback){
+      onopen_callback();
+    }
+  }
+
+  function _onclose(event) {
+    console.log("Websocket closed. code = " + event.code);
+    if (onclose_callback) {
+      onclose_callback(event.code);
+    }
+  }
+
+  function _onerror(event) {
+    console.error("There is an error with Websocket.");
+    if (onerror_callback) {
+      onerror_callback();
     }
   }
 
@@ -28,18 +44,22 @@ var lineup = (function(){
     }
   }
 
-  function init(url, onmessage, onopen) {
+  function init(url, onmessage, onopen, onerror, onclose) {
     if (!onmessage) {
       console.error('lineup init should given onmessage.');
       return;
     }
-    open_callback = onopen;
+    onopen_callback = onopen;
+    onerror_callback = onerror;
     onmessage_callback = onmessage;
+    onclose_callback = onclose;
 
     // create socket
     socket = new WebSocket(url);
     socket.onopen = _onopen;
+    socket.onerror = _onerror;
     socket.onmessage = _onmessage;
+    socket.onclose = _onclose;
   }
 
   return {
